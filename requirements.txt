@@ -1,0 +1,38 @@
+streamlit
+pandas
+
+# LangChain stack
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+langchain-huggingface
+langchain-groq
+
+# PDF processing
+PyPDF2
+
+# Retry logic
+tenacity
+
+# Vector stores
+faiss-cpu
+chromadb
+
+# Embeddings & reranking
+# Pinned to 2.7.0 — versions 3.x introduced a backend/ subpackage that imports
+# sklearn at module level, which triggers "can't register atexit after shutdown"
+# on Windows with Streamlit's hot-reloader
+sentence-transformers==2.7.0
+
+# BM25 keyword search
+rank-bm25
+
+# Core ML — pinned for compatibility with sentence-transformers==2.7.0
+# numpy<2.0 required: chromadb and faiss-cpu are built against numpy 1.x C API
+torch==2.2.2
+transformers==4.40.2
+numpy==1.26.4
+
+# Data validation
+pydantic
