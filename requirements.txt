@@ -36,3 +36,6 @@ numpy==1.26.4
 
 # Data validation
 pydantic
+
+# Environment loading
+python-dotenv
