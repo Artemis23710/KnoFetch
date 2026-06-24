@@ -5,6 +5,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from rank_bm25 import BM25Okapi
 from sentence_transformers import CrossEncoder
 from src.chunking import expand_chunk_with_context
+from src.config import get_groq_api_key
 
 def expand_query(query, llm_model, api_key):
     try:
@@ -76,8 +77,13 @@ def rerank_results(query, candidates, reranker, top_k=5):
 
 
 def hybrid_search(query, collection, embedding_model, all_documents,
-                  parent_map=None, k_vectors=10, k_keywords=10, k_final=5):
-    expanded_queries = expand_query(query, "groq", st.session_state.get('api_key', ''))
+                  parent_map=None, k_vectors=10, k_keywords=10, k_final=5, api_key=None):
+    if api_key is None:
+        try:
+            api_key = st.session_state.get('api_key', '')
+        except Exception:
+            api_key = get_groq_api_key()
+    expanded_queries = expand_query(query, "groq", api_key)
     all_candidates = []
 
     for expanded_query in expanded_queries:

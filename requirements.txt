@@ -38,4 +38,7 @@ numpy==1.26.4
 pydantic
 
 # Environment loading
-python-dotenv
+python-dotenv
+fastapi
+uvicorn
+python-multipart
